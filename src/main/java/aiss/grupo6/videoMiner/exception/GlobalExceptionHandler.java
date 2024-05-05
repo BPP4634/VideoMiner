@@ -56,4 +56,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleInternalErrorException(InternalErrorException ex) {
         return new ResponseEntity<>(ex.getBody(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(InvalidChannelException.class)
+    @ResponseBody
+    public ResponseEntity<Map<String, String>> handleInvalidChannelException(InvalidChannelException ex) {
+        return new ResponseEntity<>(ex.getBody(), HttpStatus.BAD_REQUEST);
+    }
 }
