@@ -1,13 +1,8 @@
-package aiss.videominer.repository;
+package aiss.grupo6.videoMiner.repository;
 
-import aiss.videominer.model.Caption;
-import aiss.videominer.model.Comment;
+import aiss.grupo6.videoMiner.model.Caption;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Repository
 public interface CaptionRepository extends JpaRepository<Caption,String>  {

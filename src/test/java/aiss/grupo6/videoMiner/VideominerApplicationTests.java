@@ -1,4 +1,4 @@
-package aiss.videominer;
+package aiss.grupo6.videoMiner;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
