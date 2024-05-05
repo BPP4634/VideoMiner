@@ -1,7 +1,6 @@
 package aiss.grupo6.videoMiner.controller;
 
 import aiss.grupo6.videoMiner.exception.InternalErrorException;
-import aiss.grupo6.videoMiner.exception.InvalidChannelException;
 import aiss.grupo6.videoMiner.repository.ChannelRepository;
 import aiss.grupo6.videoMiner.exception.ChannelNotFoundException;
 import aiss.grupo6.videoMiner.model.Channel;
@@ -27,9 +26,6 @@ public class ChannelController {
     @Value( "${message.internalError}" )
     private String internalError;
 
-    @Value( "${message.invalidChannel}" )
-    private String invalidChannel;
-
     @GetMapping("/channels")
     public List<Channel> findAll() throws Exception{
         try{
@@ -54,12 +50,8 @@ public class ChannelController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/channels")
-    public Channel create(@Valid @RequestBody Channel channel) throws Exception {
+    public Channel create(@Valid Channel channel) throws Exception {
         try{
-            if (channel==null || channel.getName().isEmpty() ||
-                    channel.getCreatedTime().isEmpty()) {
-                throw new InvalidChannelException(invalidChannel);
-            }
             Channel newChannel = repository.save(new Channel(channel.getId(),channel.getName(),
                     channel.getDescription(),channel.getCreatedTime(),channel.getVideos()));
             return newChannel;
