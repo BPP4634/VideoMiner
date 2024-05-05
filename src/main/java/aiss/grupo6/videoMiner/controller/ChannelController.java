@@ -50,7 +50,7 @@ public class ChannelController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/channels")
-    public Channel create(@Valid Channel channel) throws Exception {
+    public Channel create(@RequestBody @Valid Channel channel) throws Exception {
         try{
             Channel newChannel = repository.save(new Channel(channel.getId(),channel.getName(),
                     channel.getDescription(),channel.getCreatedTime(),channel.getVideos()));
