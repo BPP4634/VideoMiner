@@ -54,13 +54,17 @@ public class ChannelController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/channels")
-    public Channel create(@Valid @RequestBody Channel channel) throws InvalidChannelException {
+    public Channel create(@Valid @RequestBody Channel channel) throws Exception {
         try{
+            if (channel==null || channel.getName().isEmpty() ||
+                    channel.getCreatedTime().isEmpty()) {
+                throw new InvalidChannelException(invalidChannel);
+            }
             Channel newChannel = repository.save(new Channel(channel.getId(),channel.getName(),
                     channel.getDescription(),channel.getCreatedTime(),channel.getVideos()));
             return newChannel;
-        } catch(Exception e) {
-            throw new InvalidChannelException(invalidChannel);
+        } catch(RuntimeException e) {
+            throw new InternalErrorException(internalError);
         }
 
     }
