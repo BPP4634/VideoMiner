@@ -98,7 +98,7 @@ public class ChannelController {
             Channel newChannel = repository.save(new Channel(channel.getId(),channel.getName(),
                     channel.getDescription(),channel.getCreatedTime(),channel.getVideos()));
             return newChannel;
-        } catch(RuntimeException e) {
+        } catch(Exception e) {
             throw new InternalErrorException(internalError);
         }
 

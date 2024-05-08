@@ -1,7 +1,10 @@
 package aiss.grupo6.videoMiner.controller;
 
+import aiss.grupo6.videoMiner.exception.ChannelNotFoundException;
 import aiss.grupo6.videoMiner.exception.InternalErrorException;
+import aiss.grupo6.videoMiner.model.Channel;
 import aiss.grupo6.videoMiner.model.Comment;
+import aiss.grupo6.videoMiner.repository.ChannelRepository;
 import aiss.grupo6.videoMiner.repository.VideoRepository;
 import aiss.grupo6.videoMiner.exception.VideoNotFoundException;
 import aiss.grupo6.videoMiner.model.Video;
@@ -34,11 +37,17 @@ public class VideoController {
     @Autowired
     VideoRepository repository;
 
+    @Autowired
+    ChannelRepository channelRepository;
+
     @Value( "${message.videoNotFound}" )
     private String videoError;
 
     @Value( "${message.internalError}" )
     private String internalError;
+
+    @Value( "${message.channelNotFound}" )
+    private String channelError;
 
     @Operation(
             summary = "Retrieve all Videos",
@@ -95,9 +104,18 @@ public class VideoController {
             @ApiResponse(responseCode = "404", content = @Content(schema = @Schema()), description = "API could not find data for that id, check format of id"),
             @ApiResponse(responseCode = "500", content = @Content(schema = @Schema()), description = "Database may not be accessible at the moment, please try again later or check connections")
     })
-    //Inserta aquí el método
 
-    //Aquí debajo está el parámetro con comentarios, copia y reemplaza
-    @Parameter(required = true, description = "Id of the channel to search for videos") @PathVariable String id
+    @GetMapping("/channels/{id}/videos")
+    public List<Video> findVideosOfChannel(@Parameter(required = true, description = "Id of the channel to search for videos") @PathVariable String id) throws Exception {
+        try {
+            Optional<Channel> channel = channelRepository.findById(id);
+            if (!channel.isPresent()) {
+                throw new ChannelNotFoundException(channelError);
+            }
+            return channel.get().getVideos();
+        } catch (RuntimeException e){
+            throw new InternalErrorException(internalError);
+        }
+    }
 
 }
