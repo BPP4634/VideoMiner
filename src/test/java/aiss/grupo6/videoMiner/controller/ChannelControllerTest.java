@@ -41,7 +41,7 @@ class ChannelControllerTest {
         try {
             Channel c = channel.create(new Channel("893", "prueba de creacion",
                     "no creo que funcione",
-                    "fecha de creacion: " + LocalDateTime.now().toString(), null));
+                    "fecha de creacion: " + LocalDateTime.now().toString()));
         } catch (HttpClientErrorException e) {
             assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
         }
