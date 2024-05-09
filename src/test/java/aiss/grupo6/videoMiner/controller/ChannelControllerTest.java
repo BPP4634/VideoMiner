@@ -17,7 +17,7 @@ class ChannelControllerTest {
     @Test
     public void findAll() throws Exception {
         List<Channel> channels = channel.findAll();
-        assertNotNull(channels, "Channels list must not be null");
+        assertNotNull(channels, "No channels");
         if(!channels.isEmpty()) {
             for (Channel c : channels) {
                 assertInstanceOf(String.class, c.getId(), "Channel id must be a string");
