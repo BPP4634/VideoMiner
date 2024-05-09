@@ -24,9 +24,6 @@ class ChannelControllerTest {
                 assertInstanceOf(String.class, c.getName(), "Channel name must be a string");
                 assertInstanceOf(String.class, c.getDescription(), "Channel description must be a string");
                 assertInstanceOf(String.class, c.getCreatedTime(), "Channel creation time must be a string");
-                for(Video v: c.getVideos()){
-
-                }
             }
         }
     }
