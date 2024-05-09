@@ -15,7 +15,7 @@ class VideoControllerTest {
 
     VideoController video;
     @Test
-    void findAll() {
+    void findAll() throws Exception {
         List<Video> videos = video.findAll();
         assertNotNull(videos, "No videos");
         if(!videos.isEmpty()) {
