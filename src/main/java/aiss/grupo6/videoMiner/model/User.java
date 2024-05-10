@@ -3,6 +3,8 @@ package aiss.grupo6.videoMiner.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 /**
  * @author Juan C. Alonso
  */
@@ -29,6 +31,28 @@ public class User {
 
     @JsonProperty("picture_link")
     private String picture_link;
+
+    public User(){}
+
+    public User(String name, String user_link, String picture_link) {
+        this.id = null;
+        this.name = name;
+        this.user_link = user_link;
+        this.picture_link = picture_link;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name) && Objects.equals(user_link, user.user_link) && Objects.equals(picture_link, user.picture_link);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, user_link, picture_link);
+    }
 
     public Long getId() {
         return id;

@@ -1,13 +1,19 @@
 package aiss.grupo6.videoMiner;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import aiss.grupo6.videoMiner.controller.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-@SpringBootTest
-class VideominerApplicationTests {
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+		MainTestControllers.class,
+})
+public class VideominerApplicationTests {
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 	}
 
 }

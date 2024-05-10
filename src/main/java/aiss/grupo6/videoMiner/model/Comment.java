@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -30,8 +31,7 @@ public class Comment {
     private User author;
 
 
-    public Comment() {
-    }
+    public Comment() {}
 
     public Comment(String text, String createdOn, User author) {
         this.id = UUID.randomUUID().toString();
@@ -45,6 +45,19 @@ public class Comment {
         this.text = text;
         this.createdOn = createdOn;
         this.author=author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment = (Comment) o;
+        return Objects.equals(id, comment.id) && Objects.equals(text, comment.text) && Objects.equals(createdOn, comment.createdOn) && Objects.equals(author, comment.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, text, createdOn, author);
     }
 
     public String getId() {

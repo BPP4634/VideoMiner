@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Juan C. Alonso
@@ -55,6 +56,19 @@ public class Channel {
         this.description = description;
         this.createdTime = createdTime;
         this.videos = new ArrayList<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Channel channel = (Channel) o;
+        return Objects.equals(id, channel.id) && Objects.equals(name, channel.name) && Objects.equals(description, channel.description) && Objects.equals(createdTime, channel.createdTime) && Objects.equals(new ArrayList<>(videos), new ArrayList<>(channel.videos));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, createdTime, videos);
     }
 
     public String getId() {
